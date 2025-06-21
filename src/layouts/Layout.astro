@@ -2,6 +2,7 @@
 import Header from "@/components/header.astro"
 import "@/styles/global.css"
 import "@fontsource/poppins"
+import { ClientRouter } from "astro:transitions"
 ---
 
 <!doctype html>
@@ -12,6 +13,7 @@ import "@fontsource/poppins"
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>tSVG</title>
+		<ClientRouter />
 	</head>
 	<body>
 		<Header />
