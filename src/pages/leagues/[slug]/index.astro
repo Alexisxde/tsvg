@@ -1,0 +1,15 @@
+---
+import IconsList from "@/components/icons-list"
+import Layout from "@/layouts/Layout.astro"
+import { getTeamIconsByLeagueSlug } from "@/server/queries/team"
+
+const { slug } = Astro.params
+if (!slug) throw new Error("Slug is required")
+
+const icons = await getTeamIconsByLeagueSlug(slug)
+console.log("icons", icons)
+---
+
+<Layout>
+	<IconsList {icons} client:load />
+</Layout>
