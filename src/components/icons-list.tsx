@@ -1,7 +1,6 @@
 import { APP_URL } from "@/lib/const"
-import { filterItems } from "@/lib/utils"
 import type { TeamWithLeague } from "@/server/db/types"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface Props {
 	icons: TeamWithLeague[]
@@ -9,11 +8,27 @@ interface Props {
 
 export default function IconsWithSearch({ icons }: Props) {
 	const [searchQuery, setSearchQuery] = useState("")
-	const filteredIcons = filterItems(searchQuery, icons)
+	const filteredIcons = icons.filter(icon => {
+		const searchLower = searchQuery.toLowerCase()
+		return icon.name.toLowerCase().includes(searchLower)
+	})
 
 	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchQuery(event.target.value)
 	}
+
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") {
+				setSearchQuery("")
+			}
+		}
+
+		window.addEventListener("keydown", handleKeyDown)
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown)
+		}
+	}, [])
 
 	return (
 		<main>
