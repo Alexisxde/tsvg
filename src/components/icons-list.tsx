@@ -1,14 +1,15 @@
 import { APP_URL } from "@/lib/const"
 import { filterItems } from "@/lib/utils"
 import type { TeamWithLeague } from "@/server/db/types"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface Props {
 	icons: TeamWithLeague[]
 }
 
 export default function IconsWithSearch({ icons }: Props) {
-	const [searchQuery, setSearchQuery] = useState("")
+	const params = new URLSearchParams(window.location.search)
+	const [searchQuery, setSearchQuery] = useState(params.get("q") || "")
 	const filteredIcons = filterItems(searchQuery, icons)
 
 	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,10 +17,16 @@ export default function IconsWithSearch({ icons }: Props) {
 	}
 
 	const copyToClipboard = (text: string) => {
-		navigator.clipboard.writeText(text).then(() => {
-			alert("Copied to clipboard: " + text)
-		})
+		navigator.clipboard.writeText(text).then(() => {})
 	}
+
+	useEffect(() => {
+		const params = new URLSearchParams(window.location.search)
+		if (searchQuery) params.set("q", searchQuery)
+		else params.delete("q")
+		const nuevaURL = `${window.location.pathname}?${params.toString()}`
+		window.history.replaceState(null, "", nuevaURL)
+	}, [searchQuery])
 
 	return (
 		<main>
