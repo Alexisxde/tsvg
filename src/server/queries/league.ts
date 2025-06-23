@@ -2,7 +2,7 @@ import { db } from "@/server/db"
 import { leagueTable } from "@/server/db/schema"
 import { eq } from "drizzle-orm"
 
-export const getLeagueIcons = async () => await db.select().from(leagueTable)
+export const getLeaguesIcons = async () => await db.select().from(leagueTable)
 export const getLeagueIconBySlug = async (slug: string) => {
 	return await db
 		.select()

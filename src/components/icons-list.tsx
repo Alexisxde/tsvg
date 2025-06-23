@@ -8,8 +8,7 @@ interface Props {
 }
 
 export default function IconsWithSearch({ icons }: Props) {
-	const params = new URLSearchParams(window.location.search)
-	const [searchQuery, setSearchQuery] = useState(params.get("q") || "")
+	const [searchQuery, setSearchQuery] = useState("")
 	const filteredIcons = filterItems(searchQuery, icons)
 
 	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +29,7 @@ export default function IconsWithSearch({ icons }: Props) {
 
 	return (
 		<main>
-			<section className="relative w-full text-base">
+			<section className="sticky top-12 w-full text-base">
 				<div className="absolute inset-y-0 left-0 flex items-center pl-3 text-zinc-500">
 					<div className="pointer-events-none">
 						<svg
@@ -52,7 +51,7 @@ export default function IconsWithSearch({ icons }: Props) {
 					type="text"
 					placeholder={`Search ${icons.length} logos...`}
 					autoComplete="off"
-					className="w-full border-b border-zinc-300 bg-zinc-100 p-3 px-10 text-zinc-900 placeholder-zinc-500 focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100"
+					className="w-full border-b border-zinc-200 bg-zinc-100 p-3 px-10 text-zinc-900 placeholder-zinc-500 shadow-xs focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100"
 					value={searchQuery}
 					onChange={handleSearchChange}
 				/>
@@ -62,7 +61,7 @@ export default function IconsWithSearch({ icons }: Props) {
 					({ id_team, slug, name, slug_league, league_name, icon }) => (
 						<article
 							key={id_team}
-							className="flex flex-col items-center justify-center rounded-md border border-zinc-200 p-4 text-zinc-900 transition-colors duration-100 dark:border-zinc-800 dark:text-zinc-100"
+							className="flex flex-col items-center justify-center rounded-md border border-zinc-200 p-4 text-zinc-900 shadow-xs transition-colors duration-100 dark:border-zinc-800 dark:text-zinc-100"
 							title={name}>
 							<img
 								src={`${APP_URL}/api/leagues/${slug_league}/${slug}`}
@@ -75,7 +74,7 @@ export default function IconsWithSearch({ icons }: Props) {
 							</span>
 							<a
 								href={`/leagues/${slug_league}`}
-								className="flex cursor-pointer items-center justify-center gap-x-1 rounded-md bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 capitalize ring-1 ring-zinc-600/10 transition-all duration-300 ease-in-out ring-inset dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/30">
+								className="flex cursor-pointer items-center justify-center gap-x-1 rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600 capitalize ring-1 ring-zinc-800/10 transition-all duration-300 ease-in-out ring-inset dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/30">
 								{league_name}
 							</a>
 							<div className="mt-2 flex items-center justify-center">

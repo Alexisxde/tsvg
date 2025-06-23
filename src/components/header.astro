@@ -1,5 +1,10 @@
+---
+import type { Session } from "@auth/core/types"
+import { Auth, SignIn, SignOut } from "auth-astro/components"
+---
+
 <header
-	class="border-border sticky top-0 z-10 flex h-12 shrink-0 items-center gap-2 border-b bg-zinc-200 shadow-xs dark:bg-zinc-950">
+	class="sticky top-0 z-10 flex h-12 shrink-0 items-center gap-2 border-b border-zinc-300 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-950">
 	<div class="flex flex-1 items-center gap-2 px-4">
 		<button
 			class="hover:bg-accent text-accent-foreground inline-flex size-7 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0">
@@ -21,6 +26,69 @@
 		</button>
 	</div>
 	<div class="flex shrink-0 items-center gap-2 px-4">
-		<div class="flex gap-4"></div>
+		<Auth>
+			{
+				(session: Session) =>
+					session ? (
+						<div class="flex items-center justify-center gap-2">
+							<a
+								href="/new"
+								class="flex cursor-pointer items-center justify-center gap-2 rounded-md bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-600 capitalize ring-1 ring-emerald-600/10 transition-all duration-300 ease-in-out ring-inset dark:bg-emerald-400/10 dark:text-emerald-400 dark:ring-emerald-400/30">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="size-4">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M12 4.5v15m7.5-7.5h-15"
+									/>
+								</svg>
+								Submit Logo
+							</a>
+							<SignOut class="flex cursor-pointer items-center justify-center gap-2 rounded-md bg-zinc-900 px-4 py-2 text-sm text-zinc-100 capitalize transition-all duration-300 ease-in-out hover:bg-zinc-700 focus:outline-none dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300">
+								Logout
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="size-4">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25"
+									/>
+								</svg>
+							</SignOut>
+						</div>
+					) : (
+						<SignIn
+							class="flex cursor-pointer items-center justify-center gap-2 rounded-md bg-zinc-900 px-4 py-2 text-sm text-zinc-100 capitalize transition-all duration-300 ease-in-out hover:bg-zinc-700 focus:outline-none dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+							provider="github">
+							<svg
+								width="1024"
+								height="1024"
+								viewBox="0 0 1024 1024"
+								fill="none"
+								class="size-4"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									fill-rule="evenodd"
+									clip-rule="evenodd"
+									d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+									transform="scale(64)"
+									fill="currentcolor"
+								/>
+							</svg>
+							Sign In
+						</SignIn>
+					)
+			}
+		</Auth>
 	</div>
 </header>

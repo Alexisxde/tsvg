@@ -19,3 +19,14 @@ export const teamsTable = sqliteTable("teams", {
 		.notNull()
 		.references(() => leagueTable.id_league, { onDelete: "cascade" })
 })
+
+export const teamsTableAuditory = sqliteTable("teamsAuditory", {
+	id_team: text("id_team").primaryKey().notNull(),
+	slug: text("slug").notNull(),
+	name: text("name").notNull(),
+	icon: text("icon").notNull(),
+	badge: text("badge"),
+	id_league: text("id_league")
+		.notNull()
+		.references(() => leagueTable.id_league, { onDelete: "cascade" })
+})

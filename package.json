@@ -9,11 +9,15 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"format": "prettier --write .",
-		"format:check": "prettier --check ."
+		"format:check": "prettier --check .",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
+		"db:push": "drizzle-kit push"
 	},
 	"dependencies": {
+		"@astrojs/node": "^9.2.2",
 		"@astrojs/react": "4.3.0",
-		"@astrojs/vercel": "8.2.0",
+		"@auth/core": "^0.40.0",
 		"@fontsource/poppins": "5.2.6",
 		"@libsql/client": "^0.15.9",
 		"@tailwindcss/vite": "4.1.10",
@@ -21,6 +25,8 @@
 		"@types/react": "19.1.8",
 		"@types/react-dom": "19.1.6",
 		"astro": "5.10.0",
+		"auth-astro": "^4.2.0",
+		"cookie": "^1.0.2",
 		"dotenv": "^16.5.0",
 		"drizzle-orm": "^0.44.2",
 		"react": "19.1.0",

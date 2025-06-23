@@ -1,8 +1,8 @@
-import { getLeagueIcons } from "@/server/queries/league"
+import { getLeaguesIcons } from "@/server/queries/league"
 import type { APIRoute } from "astro"
 
 export const GET: APIRoute = async () => {
-	const leagueData = await getLeagueIcons()
+	const leagueData = await getLeaguesIcons()
 	if (!leagueData || leagueData.length === 0)
 		return new Response(JSON.stringify({ error: "No leagues found" }), {
 			status: 404,
