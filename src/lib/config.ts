@@ -3,8 +3,7 @@ import { z } from "astro:content"
 const envSchema = z.object({
 	GITHUB_CLIENT_ID: z.string(),
 	GITHUB_CLIENT_SECRET: z.string(),
-	AUTH_SECRET: z.string(),
-	AUTH_TRUST_HOST: z.string()
+	AUTH_SECRET: z.string()
 })
 
 const { error, success, data } = envSchema.safeParse(import.meta.env)
@@ -20,9 +19,4 @@ declare global {
 	}
 }
 
-export const {
-	GITHUB_CLIENT_ID,
-	GITHUB_CLIENT_SECRET,
-	AUTH_SECRET,
-	AUTH_TRUST_HOST
-} = data
+export const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, AUTH_SECRET } = data
